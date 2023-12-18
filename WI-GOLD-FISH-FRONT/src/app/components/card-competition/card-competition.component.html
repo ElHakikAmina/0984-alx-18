@@ -1,0 +1,64 @@
+<div
+    class="w-full shadow my-5 relative bg-teal-100 rounded overflow-hidden transition-max-h duration-300 ease-in-out max-h-[1000px]"
+    >
+        <span (click)="onOpenDeleteDialog(competition)"
+        [class.opacity-50]="leftTimeText=='Finished'"
+    [class.pointer-events-none]="leftTimeText=='Finished'"
+            class="tracking-wider absolute left-1 bg-teal-400 top-1  pi pi-trash cursor-pointer px-2 text-sm rounded leading-loose mx-2 font-semibold">
+        </span>
+    <div class="lg:flex w-full">
+        <div class="bg-teal-600 rounded-l lg:w-2/12 py-4 block h-full shadow-inner">
+            <div class="text-center tracking-wide">
+                <div class="text-white font-bold text-4xl">{{ competition.date.getDay() }}</div>
+                <div class="text-white font-normal text-2xl">{{ competition.date.toLocaleString('en-US', { month:
+                    'short' }) }}</div>
+            </div>
+        </div>
+        <div class="w-full rounded-r  lg:w-11/12 xl:w-full px-1 bg-teal-100 py-5 lg:px-2 lg:py-2 tracking-wide">
+            <div class="flex flex-row lg:justify-start justify-center">
+                <div class="text-gray-700 font-medium text-sm text-center lg:text-left px-2">
+                    <i class="far fa-clock"></i> {{competition.startTime}}
+                </div>
+                <div class="text-gray-700 font-medium text-sm text-center lg:text-left px-2">
+                    <i class="far fa-clock"></i> {{competition.endTime}}
+                </div>
+                <div class="font-medium text-sm text-center lg:text-left px-2"
+                    [class.text-green-500]="leftTimeText.includes('to end')"
+                    [class.text-red-500]="leftTimeText.includes('to start')"
+                >
+                    <i class="far fa-clock"></i> {{leftTimeText}}
+                </div>
+            </div>
+            <div class="font-semibold text-gray-800 text-xl text-center lg:text-left px-2">
+                {{competition.code}}
+            </div>
+
+            <div class="text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2">
+                Location : {{competition.location}}, Number of Participants : {{competition.numberOfParticipants}}
+            </div>
+        </div>
+        <!-- <div
+            class="flex items-center w-full bg-teal-100 justify-center px-2 py-4">
+            <img (click)="showHunting=!showHunting" loading="lazy" width="30"  height="30" decoding="async" data-nimg="1" class="cursor-pointer" style="color:transparent" src="https://cdn-icons-png.flaticon.com/512/92/92400.png?ga=GA1.1.1577156254.1702208925">
+        </div> -->
+        <div *ngIf="leftTimeText!=='Finished'"
+            class="flex items-center w-full bg-teal-100 justify-center px-2 py-4">
+            <img (click)="showDetails=!showDetails" loading="lazy" width="30"  height="30" decoding="async" data-nimg="1" class="cursor-pointer" style="color:transparent" src="https://cdn-icons-png.flaticon.com/512/10047/10047996.png?ga=GA1.1.1577156254.1702208925">
+        </div>
+        <div *ngIf="leftTimeText=='Finished'"
+            class="flex items-center w-full bg-teal-100 justify-center px-2 py-4"
+            [class.cursor-pointer]="leftTimeText=='Finished'"
+            >
+            <img (click)="openPodium=!openPodium" loading="lazy" width="30"  height="30" decoding="async" data-nimg="1" class="cursor-pointer" style="color:transparent" src="https://cdn-icons-png.flaticon.com/512/274/274268.png?ga=GA1.1.1577156254.1702208925">
+        </div>
+    </div>
+    <p-sidebar header="Competition Details" [(visible)]="showDetails" [style]="{width: '50vw'}">
+        <app-competition-details  [leftTimeText]="leftTimeText" [openAddMember]="openAddMember" [canAddMember]="leftTimeText.includes('to start') && !still24" (openAddMemberChange)="showHunting=!showHunting" (openAddMemberChange)="member=$event" [competition]="competition"></app-competition-details>
+    </p-sidebar>
+    <p-sidebar header="Hunting Details" [(visible)]="showHunting" [style]="{width: '50vw'}">
+        <app-hunting-details [leftTimeText]="leftTimeText" [member]="member" [competition]="competition"></app-hunting-details>
+    </p-sidebar>
+    <p-sidebar header="Podium" [(visible)]="openPodium" [style]="{width: '50vw'}">
+        <app-podium  [competition]="competition"></app-podium>
+    </p-sidebar>
+</div>

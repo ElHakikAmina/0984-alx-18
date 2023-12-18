@@ -1,0 +1,19 @@
+<p-dialog header="Add Member Form" [(visible)]="visible" [style]="{width: '50vw'}">
+    <div>
+        <div class="mt-2 " style="height: 250px;">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+            <p-multiSelect [(ngModel)]="selectedMembers" 
+            (onChange)="onChangeSelectedMembers()"
+             [ngClass]="{
+                'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5': true,
+                'border-red-500': selectedMembers.length === 0
+            }" [style]="{width: '100%'}" scrollHeight="250px" [options]="members" class="w-full"
+                 optionLabel="name"></p-multiSelect>
+        </div>
+        <button type="submit" (click)="onSubmit()"
+            class="text-white mt-2 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            [class.bg-teal-700]="selectedMembers.length !==0" [class.bg-gray-300]="selectedMembers.length ===0">
+            Submit
+        </button>
+    </div>
+</p-dialog>

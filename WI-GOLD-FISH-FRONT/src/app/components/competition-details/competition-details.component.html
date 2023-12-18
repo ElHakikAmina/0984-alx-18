@@ -1,0 +1,10 @@
+<div class="flex flex-wrap">
+    <app-member-card *ngFor="let ranking of competition.ranking"
+    [class.pointer-events-none]="leftTimeText.includes('to start')"
+     (click)="setMember(ranking.member)" [ranking]="ranking"></app-member-card>
+    <div (click)="openAddMember=!openAddMember"  *ngIf="canAddMember"
+        class="bg-teal-500 rounded p-2 flex flex-col w-28 h-28 justify-center m-3 hover:bg-teal-400 cursor-pointer">
+        <span class="pi text-3xl flex justify-center align-middle pi-plus"></span>
+    </div>
+</div>
+<app-add-member [visible]="openAddMember" [competition]="competition"></app-add-member>

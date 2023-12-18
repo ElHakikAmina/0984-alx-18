@@ -1,0 +1,10 @@
+@keyframes expandHeight {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 100px;
+        /* Set your desired final height */
+    }
+}

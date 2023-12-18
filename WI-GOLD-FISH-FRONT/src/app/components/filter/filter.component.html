@@ -1,0 +1,30 @@
+<ul class="flex">
+    <li class=" text-white m-2 py-3 rounded  px-2 hover:bg-teal-600 cursor-pointer"
+        (click)="setFilter('ALL')" 
+        [class.bg-teal-600]="selectedFilter=='ALL'"
+        [class.bg-teal-700]="selectedFilter!=='ALL'"
+        >
+        All
+    </li>
+    <li class=" text-white m-2 py-3 rounded  px-2 hover:bg-teal-600 cursor-pointer"
+        (click)="setFilter('upcoming')" 
+        [class.bg-teal-600]="selectedFilter=='UPCOMONG'"
+        [class.bg-teal-700]="selectedFilter!=='UPCOMONG'"
+        >
+        Upcoming
+    </li>
+    <li class=" text-white m-2 py-3 rounded  px-2 hover:bg-teal-600 cursor-pointer"
+        (click)="setFilter('INPROGRESS')" 
+        [class.bg-teal-600]="selectedFilter=='INPROGRESS'"
+        [class.bg-teal-700]="selectedFilter!=='INPROGRESS'"
+        >
+        Running
+    </li>
+    <li class=" text-white m-2 py-3 rounded  px-2 hover:bg-teal-600 cursor-pointer"
+        (click)="setFilter('finished')" 
+        [class.bg-teal-600]="selectedFilter=='FINISHED'"
+        [class.bg-teal-700]="selectedFilter!=='FINISHED'"
+        >
+        Finished
+    </li>
+</ul>

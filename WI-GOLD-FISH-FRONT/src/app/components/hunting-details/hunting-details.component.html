@@ -1,0 +1,15 @@
+<div class="flex flex-wrap">
+    <div *ngFor="let hunting of competition.huntings" class="flex rounded">
+        <div *ngIf="hunting.member.num==member.num"
+            class="bg-yellow-400 relative m-2 rounded flex flex-col w-28 h-28 justify-center cursor-pointer">
+            <span class="pi flex justify-center align-middle pi-pencil absolute top-1 right-1 m-1" (click)="huntingObjectForForm=hunting" (click)="huntingform=false" (click)="huntingform=true"></span>
+            <span class="text-center">{{hunting.fish.name}}</span>
+            <span class="text-center bg-white rounded-full top-1 left-1 absolute p-2">{{hunting.numberOfFish}}</span>
+        </div>
+    </div>
+    <div (click)="huntingform=!huntingform" *ngIf="leftTimeText.includes('to end')"
+        class="bg-yellow-400 relative  m-2 rounded flex flex-col w-28 h-28 justify-center cursor-pointer">
+        <span class="pi text-3xl flex justify-center align-middle pi-plus"></span>
+    </div>
+</div>
+<app-add-hunting-form *ngIf="huntingform" [visible]="huntingform" [hunting]="huntingObjectForForm" [competition]="competition" [member]="member"></app-add-hunting-form>

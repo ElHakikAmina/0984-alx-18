@@ -1,0 +1,53 @@
+<p-dialog header="Competition Form" [(visible)]="visible" [style]="{width: '50vw'}">
+    <form [formGroup]="competitionForm" (ngSubmit)="onSubmit()">
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+            <input type="date" formControlName="date"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+            <small *ngIf="competitionForm.get('date')?.hasError('invalidDate') && competitionForm.get('date')?.touched"
+                class="text-red-500">
+                Date must be in the future and not more than 3 months from now
+            </small>
+        </div>
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Time</label>
+            <input type="time" formControlName="startTime"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+            <small
+                *ngIf="competitionForm.get('startTime')?.hasError('invalidStartTime') && competitionForm.get('startTime')?.touched"
+                class="text-red-500">
+                Start time must be after 8:00 AM
+            </small>
+        </div>
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End Time</label>
+            <input type="time" formControlName="endTime"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+            <small *ngIf="competitionForm.get('endTime')?.hasError('invalidEndTime') && competitionForm.get('endTime')?.touched"
+                class="text-red-500">
+                End time must be after start time and before 8:00 PM
+            </small>
+        </div>
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number Of Participants</label>
+            <input type="number" formControlName="numberOfParticipants"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+        </div>
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+            <input type="text" formControlName="location"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+        </div>
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+            <input type="number" formControlName="amount"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+        </div>
+        <button type="submit"
+            class="text-white mt-2 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            [class.bg-teal-700]="!competitionForm.invalid" [class.bg-gray-300]="competitionForm.invalid"
+            [disabled]="competitionForm.invalid">
+            Submit
+        </button>
+    </form>
+</p-dialog>

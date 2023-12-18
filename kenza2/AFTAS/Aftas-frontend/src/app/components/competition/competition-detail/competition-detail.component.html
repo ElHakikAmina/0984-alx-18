@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<app-modal [open]="modal" >
+    <app-add-member (add)="addMember($event)"></app-add-member>
+</app-modal>
+<app-modal [open]="modalDelete">
+  <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    Are you sure you wanna remove this participant : {{selectedMember?.member?.name}} {{selectedMember?.member?.familyName}}
+</div>
+<app-button color="red" text="Yes i'm sure" (btnClick)="delete(selectedMember)"></app-button>
+
+</app-modal>
+<app-modal [open]="modalPodium">
+  <app-podium [podium] = "podiumList"></app-podium>
+</app-modal>
+
+<div style="min-height: 500px;" class="p-10 flex sm:flex-cols md:flex-row justify-between items-start">
+    <app-competition-card class="hidden sm:block" [competition]="competition"></app-competition-card>
+    <div class="w-full justify-start">
+        <div *ngIf="membersReached && !in_progress" class="p-4 m-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+          <span class="font-medium">Can't register!</span> Number of participants reached.
+        </div>
+        <div *ngIf="!membersReached && waiting" class=" flex justify-between items-start ">
+          <app-autocomplete (formSubmit)="onFormSubmit($event)" class="ml-4 pr-5"></app-autocomplete>
+          <app-button color="#000075" text="Add member" (btnClick) = "OpenModal()"></app-button>
+        </div>
+        <div *ngIf="in_progress" class=" flex justify-end items-start gap-4">
+          <app-button color="gray" text="Calculate score" (btnClick) = "calculate()"></app-button>
+          <app-button color="green" text="Show podium" (btnClick) = "podium()"></app-button>
+        </div>
+        <div *ngIf="closed" class=" flex justify-end items-start gap-4">
+          <app-button color="green" text="Show podium" (btnClick) = "podium()"></app-button>
+        </div>
+        <ng-container *ngIf="rankings && rankings.length > 0;">
+            <app-table [open]="in_progress" [remove]="waiting" class="p-2" [columns]="tableColumns" [data]="rankings" (Delete) = "deleteModel($event)" (Open)="OpenHunt($event)"></app-table>
+          </ng-container>
+    </div>
+</div>
+<app-footer></app-footer>

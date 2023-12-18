@@ -1,0 +1,12 @@
+<form (ngSubmit)="submitForm()" class="flex justify-around items-start">
+  <input name="member" [(ngModel)]="member" id="dropdownDefaultButton" class="w-72 pr-10 " placeholder="search" data-dropdown-toggle="dropdown" type="search" (input)="filterMembers($event)" />
+  <input type="submit" value="Add participant" class="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" />
+</form>
+<!-- Dropdown menu -->
+<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 dark:bg-gray-700">
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+      <li *ngFor="let m of filteredMembers" class="p-1 font-medium">
+        <button (click)="selectMember(m)">{{ m.num }} - {{ m.name }} {{ m.familyName }}</button>
+      </li>
+    </ul>
+  </div>

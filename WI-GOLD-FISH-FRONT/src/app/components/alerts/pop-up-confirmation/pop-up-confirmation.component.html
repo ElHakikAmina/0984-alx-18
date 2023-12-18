@@ -1,0 +1,13 @@
+<p-dialog *ngIf="alertProps.needConfirmation" header="Pop Up Message" [(visible)]="alertProps.visible" [style]="{width: '50vw'}">
+    <div class="flex flex-col justify-center items-center">
+        <div class="text-2xl font-bold text-gray-900 dark:text-white">
+            {{alertProps.message}}
+        </div>
+        <div *ngIf="alertProps.needConfirmation" class="flex justify-center items-center" >
+            <button type="button" (click)="close(true)"
+                class="text-white mt-2 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-teal-500">
+                Confirm
+            </button>
+        </div>
+    </div>
+</p-dialog>

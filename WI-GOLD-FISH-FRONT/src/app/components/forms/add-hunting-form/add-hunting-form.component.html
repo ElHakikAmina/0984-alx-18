@@ -1,0 +1,33 @@
+<p-dialog header="Competition Form" [(visible)]="visible" [style]="{width: '50vw'}">
+    <form [formGroup]="huntingForm" (ngSubmit)="onSubmit()">
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of fish</label>
+            <input type="number" formControlName="numberOfFish"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+            <!-- <small *ngIf="huntingForm.get('date')?.hasError('invalidDate') && huntingForm.get('date')?.touched"
+                class="text-red-500">
+                Date must be in the future and not more than 3 months from now
+            </small> -->
+        </div>
+        <div class="mt-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fish</label>
+            <!-- <input type="time" formControlName="fish"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 "> -->
+            <select formControlName="fish_id"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 ">
+                <option *ngFor="let fish of fishList | async" [value]="fish.name">{{fish.name}}  {{fish.level.points}} Points</option>
+            </select>
+            <!-- <small
+                *ngIf="huntingForm.get('startTime')?.hasError('invalidStartTime') && huntingForm.get('startTime')?.touched"
+                class="text-red-500">
+                Start time must be after 8:00 AM
+            </small> -->
+        </div>
+        <button type="submit"
+            class="text-white mt-2 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            [class.bg-teal-700]="!huntingForm.invalid" [class.bg-gray-300]="huntingForm.invalid"
+            [disabled]="huntingForm.invalid">
+            Submit
+        </button>
+    </form>
+</p-dialog>

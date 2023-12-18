@@ -1,0 +1,48 @@
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th *ngFor="let column of columns" scope="col" class="px-6 py-3 text-center">
+            {{ column.header }}
+          </th>
+          <th *ngIf="open" scope="col" class="px-6 py-3">Hunts</th>
+          <th *ngIf="remove" scope="col" class="px-6 py-3">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <ng-container *ngFor="let column of columns">
+            <td class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <ng-container *ngIf="isObjectColumn(column)">
+                {{ getItemValue(item, column) }}
+              </ng-container>
+              <ng-container *ngIf="!isObjectColumn(column)">
+                <ng-container *ngIf="increment">
+                  <!-- Display number with increment and decrement buttons -->
+                  <div class="flex items-center justify-center">
+                    <button (click)="decrementValue(item, column.field)" class="px-2 py-1 text-gray-600">-</button>
+                    <span>{{ item[column.field] }}</span>
+                    <button (click)="incrementValue(item, column.field)" class="px-2 py-1 text-gray-600">+</button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="!increment">
+                  <!-- Display non-numeric fields -->
+                  {{ item[column.field] }}
+                </ng-container>
+              </ng-container>
+            </td>
+          </ng-container>       
+          <td class="px-6 py-4 flex justify-center items-center">
+            <fa-icon *ngIf="open" class="cursor-pointer" [icon] = "faDetails" (click)="openHunts(item)"></fa-icon>
+            <fa-icon *ngIf="remove"
+              class="cursor-pointer"
+              (click)="onDelete(item)"
+              [ngStyle]="{ 'color': 'red' }" 
+              [icon]="faDelete"
+              > 
+            </fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="flex w-[90%] justify-end m-10">
+  <select id="categories" class="w-[40%] sm:mx-10 bg-transparent border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+  (change)="onFilterChange($event)">
+    <option selected  value="all">All competitions</option>
+    <option value="pending">Waiting</option>
+    <option value="in_progress">In Progress</option>
+    <option value="closed">Closed</option>
+  </select> 
+  <app-button color="#000075" text="Add competition" (btnClick) = "OpenModal()"></app-button>
+</div>
+<app-modal [open]="modalOpen" >
+  <app-add-competition (onAddCompetition) = "AddCompetition($event)"></app-add-competition>
+</app-modal>
+<div class="w-full flex justify-around">
+  <div class="grid grid-cols-3 gap-8 mt-4 mb-4 " style="min-height: 400px;">
+    <app-competition-card *ngFor="let competition of filteredCompetitions" [competition]="competition"></app-competition-card>
+  </div>
+  
+</div>
+<div class="flex justify-center items-center space-x-2">
+  <button
+    *ngFor="let page of pagesArray"
+    [ngClass]="{ 'bg-blue-500 text-white': page === currentPage, 'bg-gray-200 text-gray-700': page !== currentPage }"
+    class="px-3 py-2 rounded-md focus:outline-none"
+    (click)="onPageChange(page)"
+  >
+    {{ page }}
+  </button>
+</div>
+
+<app-footer></app-footer>
